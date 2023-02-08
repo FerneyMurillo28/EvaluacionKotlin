@@ -2,12 +2,14 @@ package com.example.evaluacion.Pantallas
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +28,23 @@ import com.example.evaluacion.R
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PrimerPantalla(navController: NavController){
-    Scaffold {
+    Scaffold(
+        bottomBar = {
+            BottomAppBar() {
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier.width(45.dp))
+                    Icon(imageVector = Icons.Default.Menu,
+                        contentDescription = "ArrowBack",
+                        modifier = Modifier.clickable {
+                            navController.navigate(route = AppNav.SegundaPantalla.ruta)
+                        }
+                    )
+                }
+            }
+        }
+    ) {
         Contenido1(navController)
     }
 }
@@ -53,12 +71,6 @@ fun Contenido1(navController: NavController){
                 color = Color.LightGray,
                 textAlign = TextAlign.Center
             )
-        }
-        Button(onClick = {
-            navController.navigate(route = AppNav.SegundaPantalla.ruta)
-        },
-            colors =ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray)) {
-            Text(text = "Ir al Menu")
         }
     }
 }
