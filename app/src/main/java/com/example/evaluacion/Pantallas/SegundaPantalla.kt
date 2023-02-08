@@ -11,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -71,10 +71,13 @@ fun MenuCompleto(nombre:String,precio:Int,descripcion:String,imagen:Int){
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier.size(100.dp)
             )
+            var expancion by remember{
+                mutableStateOf(false)
+            }
             Spacer(modifier = Modifier.width(40.dp))
             Column() {
                 Text(text = nombre, textAlign = TextAlign.Center, fontSize = 25.sp)
-                Text(text = descripcion, fontSize = 15.sp)
+                Text(modifier = Modifier.clickable { expancion =!expancion },text = descripcion, fontSize = 15.sp, maxLines = if (expancion) Int.MAX_VALUE else 1)
                 Text(text = "Precio:"+precio.toString()+"$", textAlign = TextAlign.End)
             }
         }
